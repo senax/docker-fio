@@ -9,7 +9,7 @@ FROM centos:centos7
 
 MAINTAINER frank@crystalconsulting.eu
 
-RUN yum -y install git make automake libtool pkgconfig libaio-devel
+RUN yum -y install git make automake libtool pkgconfig libaio-devel python-six gnuplot  && yum clean all
 
 RUN cd /root && git clone https://github.com/axboe/fio.git
 RUN cd /root/fio && ./configure && make && make install
