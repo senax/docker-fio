@@ -5,11 +5,12 @@
 # examples in /root/fio/examples
 # docker run --rm $MOUNT:/data -v $DIR:/fio senax/docker-fio --output-format=json "/fio/$TEST_TYPE.fio" --bs="$BLKSIZE" --filename /data/test --size=$SIZEGB
 
-FROM centos:centos7
+FROM rockylinux:9
 
 MAINTAINER frank@crystalconsulting.eu
 
-RUN yum -y install git make automake libtool pkgconfig libaio-devel python-six gnuplot  && yum clean all
+RUN dnf -y install epel-release.noarch
+RUN dnf -y install git make automake libtool pkgconfig libaio-devel python-six gnuplot zlib-devel libcurl-devel openssl-devel && dnf clean all
 
 RUN cd /root && git clone https://github.com/axboe/fio.git
 RUN cd /root/fio && ./configure && make && make install
